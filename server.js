@@ -44,6 +44,9 @@ app.post("/", (req, res) => {
             .filter((member) => member.user.id !== sender.id)
             .forEach(({ user }) => {
                 if (!user.online) {
+                    client.validationRequests
+                        .create({ friendlyName: 'My Home Phone Number', phoneNumber: user.phoneNumber })
+                        .then(validation_request => console.log(validation_request.friendlyName));
                     client.messages.create({
                         body: `You have a new message from ${message.user.fullName} - ${message.text}`,
                         messagingServiceSid: messagingServiceSid,
