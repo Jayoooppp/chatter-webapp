@@ -36,7 +36,6 @@ app.get("*", function (request, response) {
 
 
 
-console.log(client)
 app.post("/", (req, res) => {
     const { message, user: sender, type, members } = req.body;
     if (type === "message.new") {
@@ -66,16 +65,10 @@ app.post("/", (req, res) => {
 
 
 
-const PORT = process.env.PORT || 8080;
-
-mongoose.connect(process.env.MONGO + "/Webspace")
-    .then(() => {
-        app.listen(PORT, function () {
-            console.log("Server started at ", PORT);
-        })
-    })
-    .catch((error) => {
-        console.log(error);
-    })
+const host = '0.0.0.0';
+const port = process.env.PORT || 8080;
+app.listen(port, host, function () {
+    console.log("Server started.......", port);
+});
 
 
