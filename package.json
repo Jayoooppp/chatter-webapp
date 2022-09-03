@@ -1,0 +1,28 @@
+{
+  "name": "chatapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "build": "cd client && npm run build ",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "getstream": "^8.0.3",
+    "mongoose": "^6.5.3",
+    "stream-chat": "^7.0.0",
+    "twilio": "^3.81.0"
+  },
+  "type": "module"
+}
