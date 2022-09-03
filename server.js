@@ -37,6 +37,7 @@ app.get("*", function (request, response) {
 
 
 app.post("/", (req, res) => {
+    console.log("hii i am here");
     const { message, user: sender, type, members } = req.body;
     if (type === "message.new") {
         members
