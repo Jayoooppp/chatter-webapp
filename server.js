@@ -6,7 +6,7 @@ import authRoutes from "./Routes/auth.js"
 import twilio from "twilio"
 import path from "path"
 
-
+const __dirname = path.resolve();
 
 dotenv.config();
 const app = express();
