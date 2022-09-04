@@ -22,20 +22,37 @@ const Auth = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { userName, password, phoneNumber, profileURL } = form;
+    try {
+      const { userName, password, profileURL, confirmPassword } = form;
+      let phoneNumber = form.phoneNumber;
+      phoneNumber = "+91" + phoneNumber;
 
-    const { data: { token, userId, hashedPassword, fullName } } = await API.post(`${isSignup ? "/signup" : "/signin"}`, { userName, password, fullName: form.fullName, phoneNumber, profileURL })
-    cookies.set("token", token);
-    cookies.set("userId", userId);
-    cookies.set("fullName", fullName);
-    cookies.set("userName", userName);
-    if (isSignup) {
-      cookies.set("phoneNumber", phoneNumber)
-      cookies.set("profileURL", profileURL)
-      cookies.set("hashedPassword", hashedPassword)
+      if (password !== confirmPassword && isSignup) {
+        alert("Passwords does not match")
+
+      }
+      else {
+        const { data: { token, userId, hashedPassword, fullName } } = await API.post(`${isSignup ? "/signup" : "/signin"}`, { userName, password, fullName: form.fullName, phoneNumber, profileURL })
+        cookies.set("token", token);
+        cookies.set("userId", userId);
+        cookies.set("fullName", fullName);
+        cookies.set("userName", userName);
+        if (isSignup) {
+          cookies.set("phoneNumber", phoneNumber)
+          cookies.set("profileURL", profileURL)
+          cookies.set("hashedPassword", hashedPassword)
+
+        }
+        window.location.reload();
+      }
+
+
+    } catch (error) {
+      console.log(error)
+      alert(error.response.data.message);
 
     }
-    window.location.reload();
+
   }
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value })

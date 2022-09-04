@@ -23,15 +23,13 @@ app.use(parser.urlencoded({ limit: "30mb", extended: true }))
 
 
 app.use(express.static(path.resolve(__dirname, "./client/build")));
-// Step 2:
-// This makes the prefix URL as localhost:8080/posts
+
 app.use("/", authRoutes);
 
 
 app.get("*", function (request, response) {
     response.sendFile(path.resolve(__dirname, "client/build", "index.html"));
 });
-//Requests targetting all the notes
 
 
 
